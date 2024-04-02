@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import *
 from django.contrib import messages
-
+from django.shortcuts import redirect
 # Create your views here.
 def home(request):
     return render(request,'dashboard/home.html')
@@ -19,3 +19,7 @@ def notes(request):
     notes = Notes.objects.filter(user=request.user)
     context = {'form': form, 'notes': notes}
     return render(request, 'dashboard/notes.html', context)
+    
+def delete_note(request, pk=None):
+    Notes.objects.get(id=pk).delete()
+    return redirect('notes')

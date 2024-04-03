@@ -4,11 +4,12 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views import generic
 from youtubesearchpython import VideosSearch
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
     return render(request,'dashboard/home.html')
-
+@login_required
 def notes(request):
     if request.method == "POST":
         form = NotesForm(request.POST)
@@ -22,14 +23,14 @@ def notes(request):
     notes = Notes.objects.filter(user=request.user)
     context = {'form': form, 'notes': notes}
     return render(request, 'dashboard/notes.html', context)
-    
+  
 def delete_note(request, pk=None):
     Notes.objects.get(id=pk).delete()
     return redirect('notes')
     
 class NotesDetailView(generic.DetailView):
     model = Notes
-    
+@login_required    
 def homework(request):
     if request.method == "POST":
         form = HomeworkForm(request.POST)
@@ -61,7 +62,7 @@ def homework(request):
     }
     return render(request,'dashboard/homework.html', context)
     
-    
+@login_required   
 def update_homework(request, pk=None):
     homework = Homework.objects.get(id=pk)
     print('Yogesh')
@@ -72,11 +73,11 @@ def update_homework(request, pk=None):
         homework.is_finished = True
     homework.save()
     return redirect('homework')
-    
+@login_required    
 def delete_homework(request, pk=None):
     Homework.objects.get(id=pk).delete()
     return redirect('homework')
-    
+@login_required    
 def youtube(request):
     if request.method == "POST":
         form = DashboardForm(request.POST)
@@ -127,7 +128,7 @@ def register(request):
     }
         
     return render(request, 'dashboard/register.html', context)
-    
+@login_required     
 def profile(request):
     homeworks = Homework.objects.filter(is_finished=False, user=request.user)
     todos = Todo.objects.filter(is_finished=False, user=request.user)

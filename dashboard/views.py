@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views import generic
 from youtubesearchpython import VideosSearch
+
 # Create your views here.
 def home(request):
     return render(request,'dashboard/home.html')
@@ -107,11 +108,27 @@ def youtube(request):
     context = {'form' : form}
     return render(request, 'dashboard/youtube.html', context)
     
-def register(request):
-    form = UserRegisterForm()
-    context = {
-        'form' : form
-    }
-    return  render(request, 'dashboard/register.html',context)
     
+def register(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account Created for {username}!')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+        context = {
+            'form': form
+            
+        }
+        
+    return render(request, 'dashboard/register.html', context)
+
+
+    
+
+
+
     

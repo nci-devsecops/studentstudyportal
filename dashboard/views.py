@@ -119,10 +119,10 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-        context = {
-            'form': form
+    context = {
+        'form': form
             
-        }
+    }
         
     return render(request, 'dashboard/register.html', context)
 

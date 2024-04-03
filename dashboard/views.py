@@ -107,3 +107,11 @@ def youtube(request):
     context = {'form' : form}
     return render(request, 'dashboard/youtube.html', context)
     
+def register(request):
+    form = UserRegisterForm()
+    context = {
+        'form' : form
+    }
+    return  render(request, 'dashboard/register.html',context)
+    
+    

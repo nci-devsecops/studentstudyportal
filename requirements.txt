@@ -37,7 +37,6 @@ termcolor==1.1.0
 
 tzdata==2024.1
 
-
 virtualenv==20.25.1
 
 wcwidth==0.1.9

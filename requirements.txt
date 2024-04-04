@@ -51,4 +51,3 @@ jmespath==1.0.1
 phonenumbers==8.13.33
 distlib==0.3.8
 crispy-bootstrap6==2024.2
-django-crispy-forms==2.1

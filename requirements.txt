@@ -46,7 +46,6 @@ youtube-search-python
 
 six==1.16.0
 
-
 jmespath==1.0.1
 
 phonenumbers==8.13.33

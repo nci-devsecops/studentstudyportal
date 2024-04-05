@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto21
+  pre_build:
+    commands:
+      - yum update -y 
+      - yum install -y jq
+      - retry_count=3
+      - for i in $(seq 1 $retry_count); do wget https://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz && break || sleep 10; done
+      - tar xzf apache-maven-3.5.4-bin.tar.gz || true
+      - ln -s apache-maven-3.5.4 maven
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      
+  build:
+    commands:
+      - mvn sonar:sonar -Dsonar.login=1fe2e549d37ab5ab92699bf1cf0023167632db15 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=studentstudyportal -Dsonar.organization=nci-devsecops || true
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=studentstudyportal >result.json
+      - cat result.json
+artifacts:
+   files:
+    - '**/*'

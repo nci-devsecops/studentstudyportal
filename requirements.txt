@@ -42,6 +42,7 @@ wcwidth==0.1.9
 semantic-version==2.8.5
 
 setuptools==69.2.0
+youtube-search-python
 
 six==1.16.0
 

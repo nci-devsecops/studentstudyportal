@@ -26,7 +26,7 @@ SECRET_KEY = '@v7!kvckrz@8dumy!3o=j31*sag^u@bgh4am_q=lkutm%l_$fq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['x23193867-studentstudyportal-env.eba-mps4waqm.eu-west-1.elasticbeanstalk.com','77e6f07833da4fae94fe16f2be9a9411.vfs.cloud9.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = ['x23193867-studentstudyportal-env.eba-mps4waqm.eu-west-1.elasticbeanstalk.com','77e6f07833da4fae94fe16f2be9a9411.vfs.cloud9.eu-west-1.amazonaws.com',"*"]
 CSRF_TRUSTED_ORIGINS = ['https://77e6f07833da4fae94fe16f2be9a9411.vfs.cloud9.eu-west-1.amazonaws.com','http://x23193867-studentstudyportal-env.eba-mps4waqm.eu-west-1.elasticbeanstalk.com']
 
 # Application definition
